@@ -16,12 +16,49 @@
         width: 300px;
         position: relative;
     }
+
+    @keyframes move-right {
+        0% {left: 0px;}
+        100% {left: 250px;}
+    }
     </style>
 </head>
 <body>
-    <button id="clickme">Click</button>
+    <button id="clickme" onclick="getClick()">Click</button>
     <div class="container">
         <div id="avatar"></div>
     </div>
+
+    <script>
+    var avatar = document.getElementById("avatar");
+
+    function getClick() {
+        // charMove(avatar);
+        charAnimate(avatar);
+    }
+
+    function charMove(char) {
+        var pos = 0;
+        var id = setInterval(frame, 5);
+
+        function frame() {
+            if (pos == 250) {
+                clearInterval(id);
+                char.style.left = 0;
+            } else {
+                pos++;
+                char.style.left = pos + "px";
+            }
+        }
+    }
+
+    function charAnimate(char) {
+        char.style.animation = "move-right 2s linear both";
+        char.addEventListener("animationend", function() {
+            char.style.animation = "none";
+            char.style.left = "250px";
+        })
+    }
+    </script>
 </body>
 </html>
