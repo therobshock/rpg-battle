@@ -10,6 +10,8 @@ var displayOppHP = document.getElementById("opponent-hp");
 var player = document.getElementById("player");
 var opponent = document.getElementById("opponent");
 
+var characters = document.getElementsByClassName("character");
+
 var gameDialog1 = document.getElementById("dialog1");
 var gameDialog2 = document.getElementById("dialog2");
 var gameDialog3 = document.getElementById("dialog3");
@@ -50,8 +52,8 @@ function choiceFunction(choice) {
 
     console.log(`Player: ${playerChoice} Opponent: ${opponentChoice}`);
 
-    charMove("player");
-    charMove();
+    charMove(player, "left", "slow");
+    charMove(opponent, "right", "fast");
 
     gameDialog1.innerHTML = `Player chooses ${buttonOptions[playerChoice]}. Oppenent chooses ${buttonOptions[opponentChoice]}.`;
     player.style.backgroundColor = actionColors[playerChoice];
@@ -130,22 +132,25 @@ function gameOver(win) {
     gameDialog4.innerHTML = "Play Again?";
 }
 
-function charMove(char) {
-  var pos = 0;
-  var id = setInterval(frame, 5);
-  var start = start;
+function charMove(char, dir, speed) {
+    var pos = 0;
+    var id = setInterval(frame, 5);
 
-  function frame() {
-    if (pos == 250) {
-      clearInterval(id);
-    } else {
-        if (char == "player") {
-            pos += 2; 
-            player.style.left = pos + "px"; 
+    function frame() {
+        if (pos == 250) {
+            clearInterval(id);
         } else {
-            pos++; 
-            opponent.style.right = pos + "px"; 
+            if (speed == "slow") {
+                pos++; 
+            }
+            else if (speed == "fast") {
+                pos += 5;
+            }
+            if (dir == "left") {
+                char.style.left = pos + "px"; 
+            } else if (dir == "right") {
+                char.style.right = pos + "px"; 
+            }
         }
     }
-  }
 }
