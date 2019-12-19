@@ -34,7 +34,10 @@
 
     function getClick() {
         // charMove(avatar);
-        charAnimate(avatar);
+        // charAnimate(avatar);
+        animateAttack(avatar, "left", false, function() {
+            console.log("hello");
+        });
     }
 
     function charMove(char) {
@@ -58,6 +61,45 @@
             char.style.animation = "none";
             char.style.left = "250px";
         })
+    }
+
+    function animateAttack(char, start, success, next) {
+        var pos = 0;
+        var id = setInterval(frame, 5);
+        var end = false;
+        var pass = false;
+        
+        function frame() {
+            if (pos === 0 && pass) {
+                end = true;
+            }
+            if (pos === 250) {
+                pass = true;
+            }
+            if (end) {
+                clearInterval(id);
+                return next();
+            } else {
+                if (!pass) {
+                    pos++;
+
+                } else {
+                    if (success) {
+                        pos--;
+                    } else {
+                        pos -= 5;
+                    }
+                }
+                if (start == "left") {
+                    char.style.left = pos + "px";
+                } else if (start == "right") {
+                    char.style.right = pos + "px";
+                } else {
+                    console.log("start undefined");
+                    end = true;
+                }
+            }
+        }
     }
     </script>
 </body>
