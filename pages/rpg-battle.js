@@ -52,14 +52,9 @@ function choiceFunction(choice) {
 
     console.log(`Player: ${playerChoice} Opponent: ${opponentChoice}`);
 
-    charMove(player, "left", "slow");
-    charMove(opponent, "right", "fast");
-
     gameDialog1.innerHTML = `Player chooses ${buttonOptions[playerChoice]}. Oppenent chooses ${buttonOptions[opponentChoice]}.`;
     player.style.backgroundColor = actionColors[playerChoice];
     opponent.style.backgroundColor = actionColors[opponentChoice];
-
-    console.log(actionColors[playerChoice] + " | " + actionColors[opponentChoice]);
 
     if (playerChoice === opponentChoice + 1 || playerChoice === opponentChoice - 2) {
         console.log(`Player advantage`);
@@ -132,24 +127,40 @@ function gameOver(win) {
     gameDialog4.innerHTML = "Play Again?";
 }
 
-function charMove(char, dir, speed) {
+function animateAttack(char, start, success, next) {
     var pos = 0;
     var id = setInterval(frame, 5);
-
+    var end = false;
+    var pass = false;
+    
     function frame() {
-        if (pos == 250) {
+        if (pos === 0 && pass) {
+            end = true;
+        }
+        if (pos === 250) {
+            pass = true;
+        }
+        if (end) {
             clearInterval(id);
+            return next();
         } else {
-            if (speed == "slow") {
-                pos++; 
+            if (!pass) {
+                pos++;
+
+            } else {
+                if (success) {
+                    pos--;
+                } else {
+                    pos -= 5;
+                }
             }
-            else if (speed == "fast") {
-                pos += 5;
-            }
-            if (dir == "left") {
-                char.style.left = pos + "px"; 
-            } else if (dir == "right") {
-                char.style.right = pos + "px"; 
+            if (start == "left") {
+                char.style.left = pos + "px";
+            } else if (start == "right") {
+                char.style.right = pos + "px";
+            } else {
+                console.log("start undefined");
+                end = true;
             }
         }
     }
