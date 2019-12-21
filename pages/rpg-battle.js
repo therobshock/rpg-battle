@@ -44,15 +44,18 @@ function displayStats() {
 
 function choiceFunction(choice) {
     var playerChoice = parseInt(choice);
-    var opponentChoice = Math.floor(Math.random() * 2);
+    var opponentChoice = Math.floor(Math.random() * 3);
     var buttonOptions = ["Attack", "Defend", "Magic"];
     var actionColors = ["blue", "green", "red"];
     var advantage;
     var bonus = 3;
 
+    actionButtons.style.display = "none";
+
     console.log(`Player: ${playerChoice} Opponent: ${opponentChoice}`);
 
     gameDialog1.innerHTML = `Player chooses ${buttonOptions[playerChoice]}. Oppenent chooses ${buttonOptions[opponentChoice]}.`;
+    gameDialog2.innerHTML = "";
     player.style.backgroundColor = actionColors[playerChoice];
     opponent.style.backgroundColor = actionColors[opponentChoice];
 
@@ -86,31 +89,41 @@ function rollForDamage(mod, bonus) {
    if (playerRoll > opponentRoll) {
         damage = playerRoll - opponentRoll;
         opponentHP -= damage;
-        animateAttack("player", function(){
+        animateAttack(player, true, function() {checkScore();});
+        animateAttack(opponent, false, function(){
           console.log("Player deals damage");
           gameDialog2.innerHTML = `Player deals ${damage} damage!`;
         }); 
    } else if (opponentRoll > playerRoll) {
        damage = opponentRoll - playerRoll;
        playerHP -= damage;
-       animateAttack("opponent", function() {
+       animateAttack(opponent, true, function() {checkScore();});
+       animateAttack(player, false, function() {
          console.log("Opponent deals damage");
          gameDialog2.innerHTML = `Opponent deals ${damage} damage!`;
        });
    } else {
-       gameDialog2.innerHTML = `No damage!`;
+       animateAttack(player, true, function() {checkScore();});
+       animateAttack(opponent, true, function() {
+           gameDialog2.innerHTML = `No damage!`;
+       });
    }
     console.log(`Damage: ${damage}`);
     
+}
+
+function checkScore() {
     if (playerHP <= 0) {
         playerHP = 0;
         gameOver(false);
-    }
-    if (opponentHP <= 0) {
+    } else if (opponentHP <= 0) {
         opponentHP = 0; 
         gameOver(true);
+    } else {
+        actionButtons.style.display = "block";
+        displayStats();
     }
-    displayStats();
+
 }
 
 function gameOver(win) {
@@ -131,41 +144,38 @@ function gameOver(win) {
     gameDialog4.innerHTML = "Play Again?";
 }
 
-function animateAttack(success, next) {
-    var playerPosition = 0;
-    var opponentPosition = 0;
+function animateAttack(char, success, next) {
+    var pos = 0;
     var id = setInterval(frame, 5);
     var end = false;
     var pass = false;
     
     function frame() {
-        if (playerPosition === 0 && opponentPosition === 0 && pass) {
+        if (pos === 0 && pass) {
             end = true;
+        }
+        if (pos === 250) {
+            pass = true;
         }
         if (end) {
             clearInterval(id);
             return next();
         } else {
-            
-          if (playerPosition === 250 && opponentPosition === 250) {
-            pass = true;
-            if (success == "player") {
-              playerPosition--;
-              opponentPosition -= 5;
-            } else if (success == "opponent") {
-              playerPosition -= 5;
-              opponentPosition--;
-            } else if (success == "draw") {
-              playerPosition--;
-              opponentPosition--;
+            if (!pass) {
+                pos++;
+
+            } else {
+                if (success) {
+                    pos--;
+                } else {
+                    pos -= 5;
+                }
             }
-          } else {
-            playerPosition++;
-            opponentPosition++;
-          }
-          player.style.left = playerPosition + "px";
-          opponent.style.right = opponentPosition + "px";
-        
+            if (char === player) {
+                char.style.left = pos + "px";
+            } else if (char === opponent) {
+                char.style.right = pos + "px";
+            } 
         }
     }
 }
