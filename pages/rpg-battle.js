@@ -85,14 +85,18 @@ function rollForDamage(mod, bonus) {
    console.log(`Player roll: ${playerRoll} Opponent roll: ${opponentRoll}`)
    if (playerRoll > opponentRoll) {
         damage = playerRoll - opponentRoll;
-        opponentHP -= damage; 
-        console.log("Player deals damage");
-        gameDialog2.innerHTML = `Player deals ${damage} damage!`;
+        opponentHP -= damage;
+        animateAttack("player", function(){
+          console.log("Player deals damage");
+          gameDialog2.innerHTML = `Player deals ${damage} damage!`;
+        }); 
    } else if (opponentRoll > playerRoll) {
        damage = opponentRoll - playerRoll;
        playerHP -= damage;
-       console.log("Opponent deals damage");
-       gameDialog2.innerHTML = `Opponent deals ${damage} damage!`;
+       animateAttack("opponent", function() {
+         console.log("Opponent deals damage");
+         gameDialog2.innerHTML = `Opponent deals ${damage} damage!`;
+       });
    } else {
        gameDialog2.innerHTML = `No damage!`;
    }
@@ -127,41 +131,41 @@ function gameOver(win) {
     gameDialog4.innerHTML = "Play Again?";
 }
 
-function animateAttack(char, start, success, next) {
-    var pos = 0;
+function animateAttack(success, next) {
+    var playerPosition = 0;
+    var opponentPosition = 0;
     var id = setInterval(frame, 5);
     var end = false;
     var pass = false;
     
     function frame() {
-        if (pos === 0 && pass) {
+        if (playerPosition === 0 && opponentPosition === 0 && pass) {
             end = true;
-        }
-        if (pos === 250) {
-            pass = true;
         }
         if (end) {
             clearInterval(id);
             return next();
         } else {
-            if (!pass) {
-                pos++;
-
-            } else {
-                if (success) {
-                    pos--;
-                } else {
-                    pos -= 5;
-                }
+            
+          if (playerPosition === 250 && opponentPosition === 250) {
+            pass = true;
+            if (success == "player") {
+              playerPosition--;
+              opponentPosition -= 5;
+            } else if (success == "opponent") {
+              playerPosition -= 5;
+              opponentPosition--;
+            } else if (success == "draw") {
+              playerPosition--;
+              opponentPosition--;
             }
-            if (start == "left") {
-                char.style.left = pos + "px";
-            } else if (start == "right") {
-                char.style.right = pos + "px";
-            } else {
-                console.log("start undefined");
-                end = true;
-            }
+          } else {
+            playerPosition++;
+            opponentPosition++;
+          }
+          player.style.left = playerPosition + "px";
+          opponent.style.right = opponentPosition + "px";
+        
         }
     }
 }
