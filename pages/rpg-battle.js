@@ -134,19 +134,19 @@ function gameOver(win) {
     if (win) {
         wins++;
         console.log("Victory!");
-        gameDialog3.innerHTML = "Player is victorious!";
+        gameDialog1.innerHTML = "Player is victorious!";
         player.style.backgroundImage = "url(images/helmet_02c.png)";
         opponent.style.backgroundImage = "url(images/death.png)";
     } else {
         losses++;
         console.log("Defeat!");
-        gameDialog3.innerHTML = "Player is defeated!";
+        gameDialog1.innerHTML = "Player is defeated!";
         opponent.style.backgroundImage = "url(images/helmet_02e.png)";
         player.style.backgroundImage = "url(images/death.png)";
     }
     displayStats();
     console.log("Play Again");
-    gameDialog4.innerHTML = "Play Again?";
+    gameDialog2.innerHTML = "Play Again?";
 }
 
 function animateAttack(char, success, next) {
@@ -159,7 +159,7 @@ function animateAttack(char, success, next) {
         if (pos === 0 && pass) {
             end = true;
         }
-        if (pos === 250) {
+        if (pos === 150) {
             pass = true;
         }
         if (end) {
