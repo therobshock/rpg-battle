@@ -24,8 +24,10 @@ function gameStart() {
     playerHP = 20;
     opponentHP = 20;
     actionButtons.style.display = "block";
-    player.style.backgroundColor = "orange";
-    opponent.style.backgroundColor = "orange";
+    player.style.backgroundImage = "url(images/helmet_02c.png)";
+    player.style.backgroundColor = "none";
+    opponent.style.backgroundImage = "url(images/helmet_02e.png)";
+    opponent.style.backgroundColor = "none";
     startButton.style.display = "none";
     gameDialog1.innerHTML = "Begin Battle!";
     gameDialog2.innerHTML = "";
@@ -46,7 +48,7 @@ function choiceFunction(choice) {
     var playerChoice = parseInt(choice);
     var opponentChoice = Math.floor(Math.random() * 3);
     var buttonOptions = ["Attack", "Defend", "Magic"];
-    var actionColors = ["blue", "green", "red"];
+    var actionImages = ["url(images/sword_02c.png)", "url(images/shield_03b.png)", "url(images/staff_03d.png)"];
     var advantage;
     var bonus = 3;
 
@@ -56,8 +58,8 @@ function choiceFunction(choice) {
 
     gameDialog1.innerHTML = `Player chooses ${buttonOptions[playerChoice]}. Oppenent chooses ${buttonOptions[opponentChoice]}.`;
     gameDialog2.innerHTML = "";
-    player.style.backgroundColor = actionColors[playerChoice];
-    opponent.style.backgroundColor = actionColors[opponentChoice];
+    player.style.backgroundImage = actionImages[playerChoice];
+    opponent.style.backgroundImage = actionImages[opponentChoice];
 
     if (playerChoice === opponentChoice + 1 || playerChoice === opponentChoice - 2) {
         console.log(`Player advantage`);
@@ -133,11 +135,14 @@ function gameOver(win) {
         wins++;
         console.log("Victory!");
         gameDialog3.innerHTML = "Player is victorious!";
-        
+        player.style.backgroundImage = "url(images/helmet_02c.png)";
+        opponent.style.backgroundImage = "url(images/death.png)";
     } else {
         losses++;
         console.log("Defeat!");
         gameDialog3.innerHTML = "Player is defeated!";
+        opponent.style.backgroundImage = "url(images/helmet_02e.png)";
+        player.style.backgroundImage = "url(images/death.png)";
     }
     displayStats();
     console.log("Play Again");
