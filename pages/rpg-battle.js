@@ -10,12 +10,8 @@ var displayOppHP = document.getElementById("opponent-hp");
 var player = document.getElementById("player");
 var opponent = document.getElementById("opponent");
 
-var characters = document.getElementsByClassName("character");
-
 var gameDialog1 = document.getElementById("dialog1");
 var gameDialog2 = document.getElementById("dialog2");
-var gameDialog3 = document.getElementById("dialog3");
-var gameDialog4 = document.getElementById("dialog4");
 
 var actionButtons = document.getElementById("action-buttons");
 var startButton = document.getElementById("new-game");
@@ -23,16 +19,20 @@ var startButton = document.getElementById("new-game");
 function gameStart() {
     playerHP = 20;
     opponentHP = 20;
+
     actionButtons.style.display = "block";
+    
     player.style.backgroundImage = "url(images/helmet_02c.png)";
     player.style.backgroundColor = "none";
+    
     opponent.style.backgroundImage = "url(images/helmet_02e.png)";
     opponent.style.backgroundColor = "none";
+    
     startButton.style.display = "none";
+    
     gameDialog1.innerHTML = "Begin Battle!";
     gameDialog2.innerHTML = "";
-    gameDialog3.innerHTML = "";
-    gameDialog4.innerHTML = "";
+    
     displayStats();
 }
 
@@ -80,38 +80,44 @@ function rollForDamage(mod, bonus) {
     var playerRoll = Math.floor(Math.random() * 6) + 1
     var opponentRoll = Math.floor(Math.random() * 6) + 1
     var damage = 0;
-   if (mod) {
+   
+    if (mod) {
        if (mod == "player") {
             playerRoll += bonus;
        } else {
             opponentRoll += bonus;
-       }
-   }
+       }   
+    }
+   
    console.log(`Player roll: ${playerRoll} Opponent roll: ${opponentRoll}`)
+
    if (playerRoll > opponentRoll) {
         damage = playerRoll - opponentRoll;
         opponentHP -= damage;
+
         animateAttack(player, true, function() {checkScore();});
         animateAttack(opponent, false, function(){
           console.log("Player deals damage");
           gameDialog2.innerHTML = `Player deals ${damage} damage!`;
-        }); 
+        });
+
    } else if (opponentRoll > playerRoll) {
        damage = opponentRoll - playerRoll;
        playerHP -= damage;
+
        animateAttack(opponent, true, function() {checkScore();});
        animateAttack(player, false, function() {
          console.log("Opponent deals damage");
          gameDialog2.innerHTML = `Opponent deals ${damage} damage!`;
        });
+
    } else {
        animateAttack(player, true, function() {checkScore();});
        animateAttack(opponent, true, function() {
            gameDialog2.innerHTML = `No damage!`;
        });
    }
-    console.log(`Damage: ${damage}`);
-    
+    console.log(`Damage: ${damage}`);  
 }
 
 function checkScore() {
@@ -125,7 +131,6 @@ function checkScore() {
         actionButtons.style.display = "block";
         displayStats();
     }
-
 }
 
 function gameOver(win) {

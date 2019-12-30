@@ -32,6 +32,7 @@
     <h4 id="wins"></h4>
     <h3 id="player-hp">Player HP:</h3>
     <h3 id="opponent-hp">Opponent HP:</h3>
+
     <div class="battlefield">
         <div class="player-pos position">
             <div class="player character" id="player"></div>
@@ -40,21 +41,20 @@
             <div class="opponent character" id="opponent"></div>
         </div>
     </div>
+
     <p id="dialog1">Begin Battle!</p>
     <p id="dialog2"></p>
-    <p id="dialog3"></p>
-    <p id="dialog4"></p>
+
     <div class="action-buttons" id="action-buttons">
         <button value="0" onclick="choiceFunction(this.value)">Attack</button>
         <button value="1" onclick="choiceFunction(this.value)">Defend</button>
         <button value="2" onclick="choiceFunction(this.value)">Magic</button>
     </div>
+
     <button class="new-game" id="new-game" onclick="gameStart()">Start</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="rpg-battle.js"></script>
-<script>
 
-</script>
 </body>
 </html>
