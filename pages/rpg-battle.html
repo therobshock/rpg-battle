@@ -8,7 +8,7 @@
     <style>
         .battlefield {
             display: flex;
-            height: 50px;
+            height: 100px;
         }
         .position {
             width: 200px;
@@ -21,24 +21,36 @@
             background-repeat: no-repeat;
             background-size: contain;
             position: absolute;
+            bottom: 0;
         }
         .opponent {
             right: 0px;
         }
+        .hp {
+            position: absolute;
+            top: 0;
+        }
+        #opponent-hp {
+            right: 0;
+}
     </style>
 </head>
 <body>
-    <h2>Choose action to Battle!</h2>
-    <h4 id="wins"></h4>
-    <h3 id="player-hp">Player HP:</h3>
-    <h3 id="opponent-hp">Opponent HP:</h3>
-
-    <div class="battlefield">
+    <h2>RPG Battle!</h2>
+    <div id="scoreboard">
+      <h4 id="wins"></h4>
+      <!-- <h3 id="player-hp"></h3> -->
+      <!-- <h3 id="opponent-hp"></h3> -->
+    </div>
+    
+    <div class="battlefield" id="battlefield">
         <div class="player-pos position">
-            <div class="player character" id="player"></div>
+          <p class="hp" id="player-hp"></p>
+          <div class="player character" id="player"></div>
         </div>
         <div class="opponent-pos position">
-            <div class="opponent character" id="opponent"></div>
+          <p class="hp" id="opponent-hp"></p>
+          <div class="opponent character" id="opponent"></div>
         </div>
     </div>
 

@@ -3,10 +3,12 @@ var opponentHP = 20;
 var wins = 0;
 var losses = 0;
 
+var scoreboard = document.getElementById("scoreboard");
 var displayWins = document.getElementById("wins");
 var displayPlayerHP = document.getElementById("player-hp");
 var displayOppHP = document.getElementById("opponent-hp");
 
+var battlefield = document.getElementById("battlefield");
 var player = document.getElementById("player");
 var opponent = document.getElementById("opponent");
 
@@ -16,11 +18,26 @@ var gameDialog2 = document.getElementById("dialog2");
 var actionButtons = document.getElementById("action-buttons");
 var startButton = document.getElementById("new-game");
 
+function beginBattle() {
+  // scoreboard.style.display = "none";
+  actionButtons.style.display = "none";
+  startButton.style.display = "block";
+
+  player.style.backgroundImage = "url(images/helmet_02c.png)";
+  opponent.style.backgroundImage = "url(images/helmet_02e.png)";
+
+  gameDialog1.innerHTML = "Ready to Battle?"
+}
+
+beginBattle();
+
 function gameStart() {
     playerHP = 20;
     opponentHP = 20;
 
+    // scoreboard.style.display = "block";
     actionButtons.style.display = "block";
+    startButton.style.display = "none";
     
     player.style.backgroundImage = "url(images/helmet_02c.png)";
     player.style.backgroundColor = "none";
@@ -28,15 +45,12 @@ function gameStart() {
     opponent.style.backgroundImage = "url(images/helmet_02e.png)";
     opponent.style.backgroundColor = "none";
     
-    startButton.style.display = "none";
     
     gameDialog1.innerHTML = "Begin Battle!";
-    gameDialog2.innerHTML = "";
+    gameDialog2.innerHTML = "Choose Action to Battle!";
     
     displayStats();
 }
-
-gameStart();
 
 function displayStats() {
     displayWins.innerHTML = `Wins: ${wins} Losses: ${losses}`;
