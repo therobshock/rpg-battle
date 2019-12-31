@@ -29,10 +29,26 @@
         .hp {
             position: absolute;
             top: 0;
+            margin: 0;
+            padding: 0;
         }
         #opponent-hp {
             right: 0;
-}
+        }
+        .health-bar {
+            position: absolute;
+            top: 25px;
+            height: 10px;
+            width: 150px;
+            border: solid black 1px;
+            padding: 0;
+        }
+        .health {
+            height: 100%;
+            width: 100%;
+            background-color: red;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -45,7 +61,10 @@
     
     <div class="battlefield" id="battlefield">
         <div class="player-pos position">
-          <p class="hp" id="player-hp"></p>
+            <p class="hp" id="player-hp"></p>
+            <div class="health-bar">
+                <div id="player-health" class="health"></div>
+            </div>
           <div class="player character" id="player"></div>
         </div>
         <div class="opponent-pos position">

@@ -56,6 +56,9 @@ function displayStats() {
     displayWins.innerHTML = `Wins: ${wins} Losses: ${losses}`;
     displayPlayerHP.innerHTML = `Player HP: ${playerHP}`;
     displayOppHP.innerHTML = `Oppenent HP: ${opponentHP}`;
+
+    player.style.backgroundImage = "url(images/helmet_02c.png)";
+    opponent.style.backgroundImage = "url(images/helmet_02e.png)";
 }
 
 function choiceFunction(choice) {
@@ -150,20 +153,21 @@ function checkScore() {
 function gameOver(win) {
     actionButtons.style.display = "none";
     startButton.style.display = "block";
+
     if (win) {
         wins++;
+        displayStats();
         console.log("Victory!");
         gameDialog1.innerHTML = "Player is victorious!";
-        player.style.backgroundImage = "url(images/helmet_02c.png)";
         opponent.style.backgroundImage = "url(images/death.png)";
     } else {
         losses++;
+        displayStats();
         console.log("Defeat!");
         gameDialog1.innerHTML = "Player is defeated!";
-        opponent.style.backgroundImage = "url(images/helmet_02e.png)";
         player.style.backgroundImage = "url(images/death.png)";
     }
-    displayStats();
+    
     console.log("Play Again");
     gameDialog2.innerHTML = "Play Again?";
 }

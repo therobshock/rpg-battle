@@ -9,7 +9,7 @@
     #avatar {
         position: absolute;
         height: 50px;
-        width: 50px;
+        width: 100%;
         background: red;
     }
     .container {
@@ -32,12 +32,27 @@
     <script>
     var avatar = document.getElementById("avatar");
 
+    var hp = 20;
+
+    console.log(hp);
+
     function getClick() {
         // charMove(avatar);
         // charAnimate(avatar);
-        animateAttack(avatar, "left", false, function() {
+        /* animateAttack(avatar, "left", false, function() {
             console.log("hello");
-        });
+        }); */
+        reduceBar();
+    }
+
+    function reduceBar() {
+        hp--;
+        var barSize = hp * 5;
+        if (hp <= 0) {
+            hp = 0;
+        }
+        avatar.style.width = barSize + "%";
+        console.log(hp);
     }
 
     function charMove(char) {
