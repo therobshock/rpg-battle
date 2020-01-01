@@ -1,14 +1,22 @@
-var playerHP = 20;
-var opponentHP = 20;
+var playerMax = 20;
+var opponentMax = 20;
+
+var playerHP = playerMax;
+var opponentHP = opponentMax;
 var wins = 0;
 var losses = 0;
 
 var scoreboard = document.getElementById("scoreboard");
 var displayWins = document.getElementById("wins");
+
+var battlefield = document.getElementById("battlefield");
+
 var displayPlayerHP = document.getElementById("player-hp");
 var displayOppHP = document.getElementById("opponent-hp");
 
-var battlefield = document.getElementById("battlefield");
+var playerHealthBar = document.getElementById("player-health");
+var opponentHealthBar = document.getElementById("opponent-health");
+
 var player = document.getElementById("player");
 var opponent = document.getElementById("opponent");
 
@@ -18,24 +26,24 @@ var gameDialog2 = document.getElementById("dialog2");
 var actionButtons = document.getElementById("action-buttons");
 var startButton = document.getElementById("new-game");
 
+
 function beginBattle() {
-  // scoreboard.style.display = "none";
   actionButtons.style.display = "none";
   startButton.style.display = "block";
 
   player.style.backgroundImage = "url(images/helmet_02c.png)";
   opponent.style.backgroundImage = "url(images/helmet_02e.png)";
 
-  gameDialog1.innerHTML = "Ready to Battle?"
+  gameDialog1.innerHTML = "Ready to Battle?";
+
 }
 
 beginBattle();
 
 function gameStart() {
-    playerHP = 20;
-    opponentHP = 20;
+    playerHP = playerMax;
+    opponentHP = opponentMax;
 
-    // scoreboard.style.display = "block";
     actionButtons.style.display = "block";
     startButton.style.display = "none";
     
@@ -59,6 +67,9 @@ function displayStats() {
 
     player.style.backgroundImage = "url(images/helmet_02c.png)";
     opponent.style.backgroundImage = "url(images/helmet_02e.png)";
+    
+    updateStatbar(playerHealthBar, playerHP, playerMax);
+    updateStatbar(opponentHealthBar, opponentHP, opponentMax);
 }
 
 function choiceFunction(choice) {
@@ -167,7 +178,7 @@ function gameOver(win) {
         gameDialog1.innerHTML = "Player is defeated!";
         player.style.backgroundImage = "url(images/death.png)";
     }
-    
+
     console.log("Play Again");
     gameDialog2.innerHTML = "Play Again?";
 }
@@ -206,4 +217,10 @@ function animateAttack(char, success, next) {
             } 
         }
     }
+}
+
+function updateStatbar(bar, stat, max) {
+    var multiplier = 100 / max;
+    var barSize = stat * multiplier;
+    bar.style.width = barSize + "%";
 }
