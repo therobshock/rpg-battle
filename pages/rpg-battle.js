@@ -14,6 +14,8 @@ var battlefield = document.getElementById("battlefield");
 var displayPlayerHP = document.getElementById("player-hp");
 var displayOppHP = document.getElementById("opponent-hp");
 
+var healthBars = document.getElementsByClassName("health-bar");
+
 var playerHealthBar = document.getElementById("player-health");
 var opponentHealthBar = document.getElementById("opponent-health");
 
@@ -26,16 +28,20 @@ var gameDialog2 = document.getElementById("dialog2");
 var actionButtons = document.getElementById("action-buttons");
 var startButton = document.getElementById("new-game");
 
+function toggleHealthbars(toggle) {
+    for (var i = 0; i < healthBars.length; i++) {
+        healthBars[i].style.display = toggle;
+    }
+}
 
 function beginBattle() {
-  actionButtons.style.display = "none";
-  startButton.style.display = "block";
+    // actionButtons.style.display = "none";
+    // startButton.style.display = "block";
 
-  player.style.backgroundImage = "url(images/helmet_02c.png)";
-  opponent.style.backgroundImage = "url(images/helmet_02e.png)";
+    player.style.backgroundImage = "url(images/helmet_02c.png)";
+    opponent.style.backgroundImage = "url(images/helmet_02e.png)";
 
-  gameDialog1.innerHTML = "Ready to Battle?";
-
+    gameDialog1.innerHTML = "Ready to Battle?";
 }
 
 beginBattle();
@@ -44,14 +50,14 @@ function gameStart() {
     playerHP = playerMax;
     opponentHP = opponentMax;
 
+    toggleHealthbars("block");
+
     actionButtons.style.display = "block";
     startButton.style.display = "none";
     
     player.style.backgroundImage = "url(images/helmet_02c.png)";
-    player.style.backgroundColor = "none";
     
     opponent.style.backgroundImage = "url(images/helmet_02e.png)";
-    opponent.style.backgroundColor = "none";
     
     
     gameDialog1.innerHTML = "Begin Battle!";

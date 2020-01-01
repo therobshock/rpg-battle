@@ -1,0 +1,47 @@
+.battlefield {
+    display: flex;
+    height: 100px;
+}
+.court {
+    width: 200px;
+}
+.position {
+    height: 50px;
+    width: 100%;
+    position: relative;
+}
+.character {
+    height: 50px;
+    width: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+}
+.opponent {
+    right: 0px;
+}
+.hp {
+    margin: 0;
+    padding: 0;
+}
+#opponent-hp, .opponent-health-bar, #opponent-health, .opponent-pos {
+    float: right;
+}
+.health-bar {
+    margin: 5px 0;
+    height: 10px;
+    width: 150px;
+    border: solid black 1px;
+    padding: 0;
+    display: none;
+}
+.health {
+    height: 100%;
+    width: 100%;
+    background-color: red;
+    margin: 0;
+}
+.action-buttons {
+    display: none;
+}
