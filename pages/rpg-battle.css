@@ -18,8 +18,12 @@
     background-size: contain;
     position: absolute;
 }
+.player {
+    background-image: url(./images/helmet_02c.png);
+}
 .opponent {
     right: 0px;
+    background-image: url(./images/helmet_02e.png);
 }
 .hp {
     margin: 0;

@@ -26,25 +26,13 @@ var gameDialog1 = document.getElementById("dialog1");
 var gameDialog2 = document.getElementById("dialog2");
 
 var actionButtons = document.getElementById("action-buttons");
-var startButton = document.getElementById("new-game");
+var startButton = document.getElementById("start");
 
 function toggleHealthbars(toggle) {
     for (var i = 0; i < healthBars.length; i++) {
         healthBars[i].style.display = toggle;
     }
 }
-
-function beginBattle() {
-    // actionButtons.style.display = "none";
-    // startButton.style.display = "block";
-
-    player.style.backgroundImage = "url(images/helmet_02c.png)";
-    opponent.style.backgroundImage = "url(images/helmet_02e.png)";
-
-    gameDialog1.innerHTML = "Ready to Battle?";
-}
-
-beginBattle();
 
 function gameStart() {
     playerHP = playerMax;
@@ -56,7 +44,6 @@ function gameStart() {
     startButton.style.display = "none";
     
     player.style.backgroundImage = "url(images/helmet_02c.png)";
-    
     opponent.style.backgroundImage = "url(images/helmet_02e.png)";
     
     
