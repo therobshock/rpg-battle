@@ -28,24 +28,14 @@ var gameDialog2 = document.getElementById("dialog2");
 var actionButtons = document.getElementById("action-buttons");
 var startButton = document.getElementById("start");
 
-function toggleHealthbars(toggle) {
-    for (var i = 0; i < healthBars.length; i++) {
-        healthBars[i].style.display = toggle;
-    }
-}
-
-function gameStart() {
-    playerHP = playerMax;
+function gameStart() { // start button function
+    playerHP = playerMax; // sets health stat
     opponentHP = opponentMax;
 
-    toggleHealthbars("block");
+    toggleHealthbars("block"); // displays health bars
 
-    actionButtons.style.display = "block";
-    startButton.style.display = "none";
-    
-    player.style.backgroundImage = "url(images/helmet_02c.png)";
-    opponent.style.backgroundImage = "url(images/helmet_02e.png)";
-    
+    actionButtons.style.display = "block"; // displays actionbuttons
+    startButton.style.display = "none"; // hides start button
     
     gameDialog1.innerHTML = "Begin Battle!";
     gameDialog2.innerHTML = "Choose Action to Battle!";
@@ -53,7 +43,13 @@ function gameStart() {
     displayStats();
 }
 
-function displayStats() {
+function toggleHealthbars(toggle) {
+    for (var i = 0; i < healthBars.length; i++) {
+        healthBars[i].style.display = toggle;
+    }
+}
+
+function displayStats() { // updates stats
     displayWins.innerHTML = `Wins: ${wins} Losses: ${losses}`;
     displayPlayerHP.innerHTML = `Player HP: ${playerHP}`;
     displayOppHP.innerHTML = `Oppenent HP: ${opponentHP}`;
@@ -65,57 +61,68 @@ function displayStats() {
     updateStatbar(opponentHealthBar, opponentHP, opponentMax);
 }
 
-function choiceFunction(choice) {
-    var playerChoice = parseInt(choice);
-    var opponentChoice = Math.floor(Math.random() * 3);
-    var buttonOptions = ["Attack", "Defend", "Magic"];
-    var actionImages = ["url(images/sword_02c.png)", "url(images/shield_03b.png)", "url(images/staff_03d.png)"];
-    var advantage;
-    var bonus = 3;
+function updateStatbar(bar, stat, max) {
+    var multiplier = 100 / max;
+    var barSize = stat * multiplier;
+    bar.style.width = barSize + "%";
+}
 
-    actionButtons.style.display = "none";
+function choiceFunction(choice) { // gets action button value
+    var playerChoice = parseInt(choice); /* Action button gets value */
+    var opponentChoice = Math.floor(Math.random() * 3); /* opponent random value between 0 and 2 */
+    var buttonOptions = ["Attack", "Defend", "Magic"]; /* Choices for dialogue */
+    var actionImages = ["url(images/sword_02c.png)", "url(images/shield_03b.png)", "url(images/staff_03d.png)"]; /* images for each choice */
+    var advantage; /* for RPS comparison */
+    var bonus = true; /* bonus to be added if advantage */
+
+    actionButtons.style.display = "none"; /* hide action buttons to avoid reclick before end sequence */
 
     console.log(`Player: ${playerChoice} Opponent: ${opponentChoice}`);
 
     gameDialog1.innerHTML = `Player chooses ${buttonOptions[playerChoice]}. Oppenent chooses ${buttonOptions[opponentChoice]}.`;
     gameDialog2.innerHTML = "";
-    player.style.backgroundImage = actionImages[playerChoice];
+    player.style.backgroundImage = actionImages[playerChoice]; /* image depending on choice */
     opponent.style.backgroundImage = actionImages[opponentChoice];
 
+    // RPS comparison 0 beats 2 beats 1 beats 0
+    // if player choice is 1 more or 2 less than oppenent then player advantage
     if (playerChoice === opponentChoice + 1 || playerChoice === opponentChoice - 2) {
         console.log(`Player advantage`);
         gameDialog1.append(" Player Advantage!");
         advantage = "player";
+    // if draw then no bonus
     } else if (opponentChoice === playerChoice) {
         console.log(`Draw`);
-        bonus = 0;
+        bonus = false;
+    // else opponent advantage
     } else {
         console.log(`Opponent advantage`);
         gameDialog1.append(" Oppenent advantage!")
         advantage = "opponent";
     }
-    rollForDamage(advantage, bonus);
+    rollForDamage(advantage, bonus); /* advantage and bonus passed to roll function */
 }
 
+// die roll 1 to 6
 function rollForDamage(mod, bonus) {
     var playerRoll = Math.floor(Math.random() * 6) + 1
     var opponentRoll = Math.floor(Math.random() * 6) + 1
     var damage = 0;
    
-    if (mod) {
+    if (bonus) { // adds bonus according to modifier
        if (mod == "player") {
-            playerRoll += bonus;
+            playerRoll += 3;
        } else {
-            opponentRoll += bonus;
+            opponentRoll += 3;
        }   
     }
    
    console.log(`Player roll: ${playerRoll} Opponent roll: ${opponentRoll}`)
 
-   if (playerRoll > opponentRoll) {
+   if (playerRoll > opponentRoll) { // reduces HP stat according to difference in roll
         damage = playerRoll - opponentRoll;
         opponentHP -= damage;
-
+        // then animates onscreen characters
         animateAttack(player, true, function() {checkScore();});
         animateAttack(opponent, false, function(){
           console.log("Player deals damage");
@@ -132,7 +139,7 @@ function rollForDamage(mod, bonus) {
          gameDialog2.innerHTML = `Opponent deals ${damage} damage!`;
        });
 
-   } else {
+   } else { // no damage if draw
        animateAttack(player, true, function() {checkScore();});
        animateAttack(opponent, true, function() {
            gameDialog2.innerHTML = `No damage!`;
@@ -141,6 +148,7 @@ function rollForDamage(mod, bonus) {
     console.log(`Damage: ${damage}`);  
 }
 
+// checkscore function to determine if game is over
 function checkScore() {
     if (playerHP <= 0) {
         playerHP = 0;
@@ -154,6 +162,7 @@ function checkScore() {
     }
 }
 
+// gameover function with win boolean
 function gameOver(win) {
     actionButtons.style.display = "none";
     startButton.style.display = "block";
@@ -176,6 +185,7 @@ function gameOver(win) {
     gameDialog2.innerHTML = "Play Again?";
 }
 
+// character animation function according to character, boolean, and a callback function after end
 function animateAttack(char, success, next) {
     var pos = 0;
     var id = setInterval(frame, 5);
@@ -210,10 +220,4 @@ function animateAttack(char, success, next) {
             } 
         }
     }
-}
-
-function updateStatbar(bar, stat, max) {
-    var multiplier = 100 / max;
-    var barSize = stat * multiplier;
-    bar.style.width = barSize + "%";
 }

@@ -9,44 +9,57 @@
 </head>
 <body>
     <h2>RPG Battle!</h2>
+
     <div id="scoreboard">
-      <h4 id="wins"></h4>
+        <h4 id="wins"></h4>
     </div>
     
     <div class="battlefield" id="battlefield">
+        
         <div class="player-court court">
+        
             <p class="hp" id="player-hp"></p>
+        
             <div class="health-bar">
                 <div id="player-health" class="health"></div>
             </div>
+        
             <div class="player-pos position">
                 <div class="player character" id="player"></div>
             </div>
+        
         </div>
+        
         <div class="opponent-court court">
-          <p class="hp" id="opponent-hp"></p>
-          <div class="health-bar opponent-health-bar">
+        
+            <p class="hp" id="opponent-hp"></p>
+        
+            <div class="health-bar opponent-health-bar">
                 <div id="opponent-health" class="health"></div>
             </div>
-          <div class="opponent-pos position">
-              <div class="opponent character" id="opponent"></div>
-          </div>
+        
+            <div class="opponent-pos position">
+                <div class="opponent character" id="opponent"></div>
+            </div>
+
         </div>
+
     </div>
 
     <p id="dialog1">Ready to Battle!</p>
     <p id="dialog2"></p>
 
     <div class="action-buttons" id="action-buttons">
+
         <button value="0" onclick="choiceFunction(this.value)">Attack</button>
         <button value="1" onclick="choiceFunction(this.value)">Defend</button>
         <button value="2" onclick="choiceFunction(this.value)">Magic</button>
+
     </div>
 
     <button class="start" id="start" onclick="gameStart()">Start</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="rpg-battle.js"></script>
-
 </body>
 </html>
