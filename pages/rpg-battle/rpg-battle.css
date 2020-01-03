@@ -38,7 +38,7 @@
     width: 150px;
     border: solid black 1px;
     padding: 0;
-    display: none;
+    display: block;
 }
 .health {
     height: 100%;
@@ -47,5 +47,5 @@
     margin: 0;
 }
 .action-buttons {
-    display: none;
+    display: block;
 }
