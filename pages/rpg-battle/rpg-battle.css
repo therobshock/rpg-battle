@@ -1,3 +1,44 @@
+html {
+    background-color: #000;
+    color: #fff;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border-style: none;
+    background-size: 30px;
+}
+
+.buttons {
+    width: 100%;
+    position: relative;
+}
+
+.character, button {
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.attack-button {
+    background-image: url(./images/sword_02c.png);
+}
+.defend-button {
+    background-image: url(./images/shield_03b.png);
+}
+.magic-button {
+    background-image: url(./images/staff_03d.png);
+}
+.start-button {
+    background-image: url(./images/play-arrow-1780211-1513049.png);
+    float: left;
+}
+
 .container {
     width: 600px;
     margin: auto;
@@ -22,10 +63,8 @@
 .character {
     height: 50px;
     width: 50px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
     position: absolute;
+    background-size: contain;
 }
 .player {
     background-image: url(./images/helmet_02c.png);
@@ -45,7 +84,8 @@
     margin: 5px 0;
     height: 10px;
     width: 150px;
-    border: solid black 1px;
+    /* border: solid black 1px; */
+    background-color: #fff;
     padding: 0;
     display: block;
 }
@@ -56,5 +96,6 @@
     margin: 0;
 }
 .action-buttons {
+    float: right;
     display: block;
 }

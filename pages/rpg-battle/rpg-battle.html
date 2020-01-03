@@ -50,15 +50,21 @@
         <p id="dialog1">Ready to Battle!</p>
         <p id="dialog2"></p>
 
-        <div class="action-buttons" id="action-buttons">
+        <div class="buttons">
+        
+            <div class="action-buttons" id="action-buttons">
 
-            <button value="0" onclick="choiceFunction(this.value)">Attack</button>
-            <button value="1" onclick="choiceFunction(this.value)">Defend</button>
-            <button value="2" onclick="choiceFunction(this.value)">Magic</button>
+                <button class="attack-button" value="0" onclick="choiceFunction(this.value)"></button>
+                <button class="defend-button" value="1" onclick="choiceFunction(this.value)"></button>
+                <button class="magic-button" value="2" onclick="choiceFunction(this.value)"></button>
 
+            </div>
+
+            <button class="start-button" id="start" onclick="gameStart()"></button>
+        
         </div>
 
-        <button class="start" id="start" onclick="gameStart()">Start</button>
+
     </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
