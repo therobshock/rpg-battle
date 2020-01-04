@@ -11,6 +11,9 @@ body {
 
 .title {
     text-align: center;
+    height: 10%;
+    margin: 0;
+    padding: 1%;
 }
 
 button {
@@ -46,7 +49,7 @@ button {
 }
 
 .container {
-    height: 80%;
+    height: 90%;
     width: 600px;
     margin: auto;
     text-align: center;
