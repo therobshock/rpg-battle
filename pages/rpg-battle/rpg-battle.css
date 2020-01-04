@@ -1,22 +1,28 @@
 html {
     background-color: #000;
     color: #fff;
+    height: 100%;
 }
 
 body {
     margin: 0;
+    height: 100%;
+}
+
+.title {
+    text-align: center;
 }
 
 button {
     height: 50px;
     width: 50px;
-    border-radius: 50%;
-    border-style: none;
+    border-radius: 35%;
+    background-color: rgb(99, 99, 99);
     background-size: 30px;
 }
 
 .buttons {
-    width: 100%;
+    width: 80%;
     position: relative;
 }
 
@@ -40,12 +46,14 @@ button {
 }
 
 .container {
+    height: 80%;
     width: 600px;
     margin: auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .battlefield {
@@ -98,4 +106,8 @@ button {
 .action-buttons {
     float: right;
     display: block;
+}
+
+.dialog, .buttons {
+    height: 10%;
 }
