@@ -96,10 +96,9 @@ button {
     margin: 5px 0;
     height: 10px;
     width: 150px;
-    /* border: solid black 1px; */
     background-color: #fff;
     padding: 0;
-    display: block;
+    display: none;
 }
 .health {
     height: 100%;
@@ -109,7 +108,7 @@ button {
 }
 .action-buttons {
     float: right;
-    display: block;
+    display: none;
 }
 
 .dialog {
