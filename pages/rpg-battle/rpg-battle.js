@@ -196,7 +196,7 @@ function animateAttack(char, success, next) {
         if (pos === 0 && pass) {
             end = true;
         }
-        if (pos === 150) {
+        if (pos === 80) {
             pass = true;
         }
         if (end) {
@@ -204,19 +204,19 @@ function animateAttack(char, success, next) {
             return next();
         } else {
             if (!pass) {
-                pos++;
+                pos += 0.625;
 
             } else {
                 if (success) {
-                    pos--;
+                    pos -= 0.5;
                 } else {
-                    pos -= 5;
+                    pos -= 2;
                 }
             }
             if (char === player) {
-                char.style.left = pos + "px";
+                char.style.left = pos + "%";
             } else if (char === opponent) {
-                char.style.right = pos + "px";
+                char.style.right = pos + "%";
             } 
         }
     }

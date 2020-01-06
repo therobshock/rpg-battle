@@ -1,14 +1,14 @@
 html {
     background-color: #000;
     color: #fff;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 body {
     margin: 0;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 }
 
 .title {
@@ -52,13 +52,12 @@ button {
 }
 
 .container {
-    height: 90%;
+    height: 325px;
     width: 600px;
     margin: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .battlefield {
@@ -113,6 +112,8 @@ button {
     display: block;
 }
 
-.dialog, .buttons {
-    height: 10%;
+.dialog {
+    height: 25%;
+    text-align: center;
 }
+

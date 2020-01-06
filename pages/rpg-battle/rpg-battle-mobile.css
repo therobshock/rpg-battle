@@ -1,0 +1,31 @@
+@media only screen and (max-width: 425px) {
+    .container {
+        width: 300px;
+    }
+    .court {
+        width: 150px;
+    }
+    .health-bar {
+        width: 125px;
+    }
+    .buttons {
+        width: auto;
+    }
+    .dialog p {
+        margin: 5px 0;
+    }
+}
+
+@media only screen and (max-height: 425px) {
+    .title {
+        height: 10vh;
+    }
+    
+    .container {
+        height: 86vh;
+    }
+
+    .dialog p {
+        margin: 5px 0;
+    }
+}

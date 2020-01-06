@@ -1,0 +1,28 @@
+Battle system with basic graphics and animations in place.
+It's good but pretty random. There basically can be no effective strategy to win
+as winning and losing depends almost entirely on chance. 
+Things other games use:
+    health potions
+    special attacks
+    actual AI (or some simulation of AI)
+    Character stats that affect action abilities
+    Different kinds of actions that provide variety on success
+
+maybe I can make an object array of objects of different opponents that have particular
+attributes and give certain actions more weight depending on their 
+attributes. 
+
+The opponents are random and you can use special items to maybe lower certain attributes
+or choose your actions accordingly. Say that there are characters that are more likely
+to use certain actions, like a warrior class will more likely use attack than magic, etc.
+
+Some games use a point system for each action, for example "staminia" points for attack and
+"mana" for magic. 
+
+Add bonus point to roll for a particular character's action to increase chance of success
+for that attack, for example, a wizard would get a bonus for using magic, warrior for attack, etc.
+
+Character types: 
+    Warrior: bonus for attack
+    Wizard: bonus for magic
+    Ninja: bonus for defend
