@@ -27,6 +27,10 @@ button {
     background-size: 30px;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .buttons {
     width: 80%;
     position: relative;
